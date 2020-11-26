@@ -1,0 +1,45 @@
+{
+    "compilerOptions": {
+        "target": "es5",
+        "module": "esnext",
+        "strict": true,
+        "jsx": "preserve",
+        "importHelpers": true,
+        "moduleResolution": "node",
+        "experimentalDecorators": true,
+        "skipLibCheck": true,
+        "esModuleInterop": true,
+        "allowSyntheticDefaultImports": true,
+        "sourceMap": true,
+        "baseUrl": ".",
+        "downlevelIteration": true,
+        "types": [
+            "webpack-env",
+            "chrome"
+        ],
+        "paths": {
+            "@/*": [
+                "src/*"
+            ]
+        },
+        "lib": [
+            "esnext",
+            "dom",
+            "dom.iterable",
+            "scripthost",
+            "es2015.collection",
+            "es2015.iterable"
+        ]
+    },
+    "include": [
+        "src/**/*.ts",
+        "src/**/*.tsx",
+        "src/**/*.vue",
+        "tests/**/*.ts",
+        "tests/**/*.tsx",
+        "src/sources/sourceList.js"
+    ],
+    "exclude": [
+        "node_modules"
+    ]
+}

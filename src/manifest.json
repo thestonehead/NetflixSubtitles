@@ -1,0 +1,48 @@
+{
+    "name": "netflix-subtitles",
+    "description": "A chrome extension that enables you to load custom subtitles for Netflix videos",
+    "permissions": [
+        "storage",
+        "activeTab",
+        "tabs",
+        "declarativeContent",
+        "https://www.podnapisi.net/",
+        "https://*.opensubtitles.org/",
+        "http://*.opensubtitles.org/"
+    ],
+    "version": "0.1",
+    "manifest_version": 2,
+    "icons": {
+        "48": "icons/icon_48.png",
+        "128": "icons/icon_128.png"
+    },
+    "page_action": {
+        "default_icon": {
+            "16": "icons/icon_16.png",
+            "24": "icons/icon_24.png",
+            "32": "icons/icon_32.png"
+        },
+        "default_title": "Netflix with subtitles",
+        "default_popup": "popup/popup.html"
+    },
+    "background": {
+        "page": "background.html",
+        "persistent": false,
+        "scripts": []
+    },
+    "options_ui": {
+        "page": "options/options.html",
+        "chrome_style": true
+    },
+    "content_scripts": [
+        {
+            "matches": [
+                "https://*.netflix.com/*"
+            ],
+            "js": [
+                "content-netflix.js"
+            ],
+            "run_at": "document_start"
+        }
+    ]
+}

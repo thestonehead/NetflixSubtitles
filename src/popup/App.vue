@@ -61,7 +61,7 @@
 ///<reference types="chrome" />
 import { SubtitleItem } from "../models/subtitle";
 import { Vue } from "vue-class-component";
-import { allGoToSources, allSources } from "../sources/sourceList";
+import { allGoToSources } from "../sources/sourceList";
 import {
 	getMetadataMessage,
 	getMetadataResponse,
@@ -87,7 +87,6 @@ export default class Popup extends Vue {
 	tabId: number | null = null;
 	myVideoId: string | null = null;
 	statusMessage = "Waiting for subtitle...";
-	allSources = allSources;
 	allGoToSources = allGoToSources;
 
 	setStatus(status: string) {

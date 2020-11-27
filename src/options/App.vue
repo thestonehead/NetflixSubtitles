@@ -116,13 +116,12 @@
 import { NetflixSettings } from "../models/settings";
 import { Vue } from "vue-class-component";
 import { Prop } from "vue-property-decorator";
-import { allSources, allOptions } from "@/sources/sourceList";
+import {  allOptions } from "@/sources/sourceList";
 
 export default class Options extends Vue {
 	netflixSettings = new NetflixSettings();
 	fontSizeDefault = true;
 	lineDefault = true;
-	allSources = allSources;
 	allOptions = allOptions;
 
 	foregroundColor: any = null;

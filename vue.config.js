@@ -2,6 +2,10 @@ const ejs = require('ejs');
 const CopyPlugin = require('copy-webpack-plugin');
 const webpack = require('webpack');
 var MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const fs = require('fs');
+
+
+
 const version = '1.0.0';
 // vue.config.js
 module.exports = {
@@ -9,18 +13,38 @@ module.exports = {
         delete config.entry.app
         config.optimization.splitChunks = false;
         config.devtool = "inline-source-map";
+
+        const entries = {
+            'background': './src/background/background.ts',
+            'popup/popup': './src/popup/popup.js',
+            'options/options': './src/options/options.js',
+            'content-netflix': ['./src/content/netflixHandler.ts', './src/content/netflixMetadataInterceptor.ts'],
+        };
+        //sources.allGoToSources.forEach(kv => entries["content-" + kv.key] = [`./src/content/${kv.key}Handler.ts`]);
+        fs.readdir("./src/sources", (err, files) => {
+            files.forEach(file => {
+                if (file.indexOf(".") > -1) return;
+                fs.readdir("./src/sources/" + file, (err, subfiles) => {
+                    if (subfiles.indexOf(file + "Handler.ts") > -1) {
+                        entries["content-"+file] = [`./src/content/${file}Handler.ts`];
+                    }
+                });
+            });
+        });
+        console.log(JSON.stringify(entries));
         return {
             output: {
                 filename: "[id].js"
             },
-            entry: {
-                'background': './src/background/background.ts',
-                'popup/popup': './src/popup/popup.js',
-                'options/options': './src/options/options.js',
-                'content-netflix': ['./src/content/netflixHandler.ts', './src/content/netflixMetadataInterceptor.ts'],
-                'content-OpenSubtitles': ['./src/content/openSubtitlesHandler.ts'],
-                'content-PodnapisiNet': ['./src/content/podnapisiNetHandler.ts']
-            },
+            /*  entry: {
+                  'background': './src/background/background.ts',
+                  'popup/popup': './src/popup/popup.js',
+                  'options/options': './src/options/options.js',
+                  'content-netflix': ['./src/content/netflixHandler.ts', './src/content/netflixMetadataInterceptor.ts'],
+                  'content-OpenSubtitles': ['./src/content/openSubtitlesHandler.ts'],
+                  'content-PodnapisiNet': ['./src/content/podnapisiNetHandler.ts']
+              },*/
+            entry: entries,
             plugins: [
                 new CopyPlugin([
                     { from: 'src/icons', to: 'icons', ignore: ['icon.xcf'] },

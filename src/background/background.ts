@@ -2,7 +2,7 @@ import { NetflixSettings } from "../models/settings";
 import { SubtitleFileItem, SubtitleItem } from "../models/subtitle";
 import VideoItem from "../models/videoItem";
 import { getMetadataMessage, getMetadataResponse, getSettingsMessage, getSubtitleListFromSourceMessage, getSubtitleListFromSourceResponse, loadSubtitleMessageFromFile, loadSubtitleMessageFromUrl, openSubtitlesSelectorTabMessage, setSettingsMessage } from '@/models/messages';
-import { allGoToSources, allSources } from "@/sources/sourceList";
+import { allGoToSources } from "@/sources/sourceList";
 import Axios from 'axios';
 
 //global.browser = require('webextension-polyfill')

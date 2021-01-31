@@ -19,19 +19,23 @@ module.exports = {
             'popup/popup': './src/popup/popup.js',
             'options/options': './src/options/options.js',
             'content-netflix': ['./src/content/netflixHandler.ts', './src/content/netflixMetadataInterceptor.ts'],
+            //HANDLERS-HERE
         };
-        //sources.allGoToSources.forEach(kv => entries["content-" + kv.key] = [`./src/content/${kv.key}Handler.ts`]);
-        fs.readdir("./src/sources", (err, files) => {
-            files.forEach(file => {
-                if (file.indexOf(".") > -1) return;
-                fs.readdir("./src/sources/" + file, (err, subfiles) => {
-                    if (subfiles.indexOf(file + "Handler.ts") > -1) {
-                        entries["content-"+file] = [`./src/content/${file}Handler.ts`];
-                    }
-                });
-            });
+
+
+
+        const files = fs.readdirSync("./src/sources");
+        files.forEach(file => {
+            if (file.indexOf(".") > -1) return;
+            let subfiles = fs.readdirSync("./src/sources/" + file);
+            if (subfiles.indexOf(file + "Handler.ts") > -1) {
+                entries["content-" + file] = [`./src/sources/${file}/${file}Handler.ts`];
+                //console.log("File1:" + JSON.stringify(entries));
+            }
         });
-        console.log(JSON.stringify(entries));
+
+        console.log(entries);
+
         return {
             output: {
                 filename: "[id].js"
@@ -74,6 +78,8 @@ module.exports = {
         }
     }
 }
+
+
 
 function transformHtml(content) {
     return ejs.render(content.toString(), {

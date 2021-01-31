@@ -4,7 +4,8 @@
     "private": true,
     "scripts": {
         "serve": "vue-cli-service serve",
-        "build": "vue-cli-service build"
+        "build": "vue-cli-service build",
+        "build2": "vue-cli-service build:handlers"
     },
     "dependencies": {
         "axios": "^0.20.0",
@@ -32,5 +33,10 @@
         "sass-loader": "^8.0.2",
         "typescript": "~3.9.3",
         "webpack": "^4.44.2"
+    },
+    "vuePlugins": {
+        "service": [
+            "build/build.handlers.ts"
+        ]
     }
 }

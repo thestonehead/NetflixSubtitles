@@ -7,7 +7,8 @@ import { OpenSubtitlesGoToSource, sourceName as openSubtitlesSourceName } from '
 
 
 export const allOptions: any[] = [
-    PodnapisiNetOptions, OpenSubtitlesOptions
+    PodnapisiNetOptions,
+    OpenSubtitlesOptions
 ];
 
 
